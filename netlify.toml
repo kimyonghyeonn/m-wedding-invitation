@@ -1,0 +1,6 @@
+[build]
+  command = "rm -rf package-lock.json && rm -rf node_modules && npm install && npm run build"
+  publish = "build"  # ✅ React는 `build` 폴더를 배포해야 함
+
+[dev]
+  command = "npm start"
