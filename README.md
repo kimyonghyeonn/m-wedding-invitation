@@ -26,6 +26,36 @@ Netlify로 만드신다면 아래 글을 참고하세요 🕵🏻‍♂️
 
 [Gatsby 테마로 모바일 결혼 청첩장 만들기](https://joy.pe.kr/gatsby-wedding-deploy/)
 
+2025.03.09 개정
+
+- 배포 전 netlify 세팅
+
+해당 프로젝트 클릭 => 좌측 Site configuration 클릭 => Build & deploy 에서 아래 절차를 실행 or ctrl + f 로 키워드 찾기 후 진행
+
+1. Build settings > Build command 는 CI= npm install && npm run build 로 설정
+2. Dependency management 의 Node.js 는 20.x 로 설정
+3. Environment variables 의 NODE_VERSION 의 VALUES 도 20으로 세팅 후 저장
+4. Environment variables > Add a variable 클릭 => Key : GO_VERSION 입력, Values 는 1.20 으로 세팅 후 저장
+
+- 배포 전 패키지 업데이트 절차
+
+1. sharp 패키지 최신버전으로 업데이트
+   => 로컬에서 다음 명령어 실행 (명령어 : npm install sharp@latest)
+
+2. netlify 배포 최적화를 위해 gatsby-plugin-netlify를 추가하고 설정
+   => 로컬에서 패키지 설치 (명령어 : npm install gatsby-plugin-netlify)
+
+3. getsby-config.js 에 아래 플러그인 추가
+   module.exports = {
+   plugins: [`gatsby-plugin-netlify`],
+   };
+
+4. Git에 반영 후 push
+
+---
+
+개정된 절차대로 진행했다면 Deploys 에서 Clear cache and deploy site 클릭하여 배포
+
 ## ❌ 오류 발생 시
 
 `rm -rf package-lock.json` 과 `rm -rf node_modules` 후 다시 `npm install` 수행
